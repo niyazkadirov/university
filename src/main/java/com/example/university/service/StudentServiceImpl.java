@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    private static final Logger log = Logger.getLogger(String.valueOf(StudentServiceImpl.class));
 
     @Autowired
     private StudentRepository studentRepository;
@@ -20,6 +23,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ResponseEntity<Student> getStudentById(Long id) throws NotFoundException {
         Student student = studentRepository.findById(id).orElseThrow(() -> new NotFoundException("student for id" + id + "does not exist"));
+        log.warning("student for id" + id + "does not exist");
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
