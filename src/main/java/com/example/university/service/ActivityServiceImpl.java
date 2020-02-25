@@ -43,6 +43,10 @@ public class ActivityServiceImpl implements ActivityService {
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(sortedActivities, HttpStatus.OK);
+    }
 
+    @Override
+    public void addActivity(Activity activity){
+        activityRepository.save(activity);
     }
 }
