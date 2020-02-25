@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Getter
@@ -24,11 +25,11 @@ public class Activity {
     @Column(name = "audience_number")
     private Long audienceNumber;
 
-    @Column(name = "start_time", columnDefinition = "date")
-    private LocalDateTime startTime;
+    @Column(name = "start_time", columnDefinition = "TIME")
+    private LocalTime startTime;
 
-    @Column(name = "end_time", columnDefinition = "date")
-    private LocalDateTime endTime;
+    @Column(name = "end_time", columnDefinition = "TIME")
+    private LocalTime endTime;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "activity", cascade = CascadeType.ALL)

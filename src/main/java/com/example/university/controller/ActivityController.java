@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -31,13 +31,13 @@ public class ActivityController {
     }
 
     @GetMapping("/date")
-    public ResponseEntity<List<Activity>> getAllByStartTimeBetween(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
-                                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
+    public ResponseEntity<List<Activity>> getAllByStartTimeBetween(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
+                                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime) {
         return activityService.getAllByStartTimeBetween(endTime, startTime);
     }
 
     @PostMapping
-    public void addActivity(Activity activity){
+    public void addActivity(Activity activity) {
         activityService.addActivity(activity);
     }
 }
