@@ -15,10 +15,19 @@ import java.util.Set;
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "audience_number")
     private Long audienceNumber;
+
+    @Column(name = "start_time", columnDefinition = "date")
     private LocalDateTime startTime;
+
+    @Column(name = "end_time", columnDefinition = "date")
     private LocalDateTime endTime;
 
     @JsonIgnore
