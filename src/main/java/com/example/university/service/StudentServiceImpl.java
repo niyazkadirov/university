@@ -3,6 +3,7 @@ package com.example.university.service;
 import com.example.university.model.Student;
 import com.example.university.repository.StudentRepository;
 import javassist.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Logger;
 
+@Slf4j
 @Service
 public class StudentServiceImpl implements StudentService {
-
-    private static final Logger log = Logger.getLogger(String.valueOf(StudentServiceImpl.class));
 
     @Autowired
     private StudentRepository studentRepository;
@@ -23,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ResponseEntity<Student> getStudentById(Long id) throws NotFoundException {
         Student student = studentRepository.findById(id).orElseThrow(() -> new NotFoundException("student for id" + id + "does not exist"));
-        log.warning("student for id" + id + "does not exist");
+        log.info("asdasdas");
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
