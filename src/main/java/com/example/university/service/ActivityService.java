@@ -15,5 +15,5 @@ public interface ActivityService {
 
     ResponseEntity<Set<Student>> getAllStudentsActivityById(Long id) throws NotFoundException;
 
-    ResponseEntity<List<Activity>> getAllByStartTimeBetween(String startTime, String endTime);
+    ResponseEntity<List<Activity>> getAllByStartTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
 }
