@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
@@ -31,5 +33,17 @@ public class ActivityServiceImpl implements ActivityService {
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<List<Activity>> getAllByStartTimeBetween(String startTime, String endTime){
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        LocalDateTime parseStartTime = dateTimeFormat.parse(startTime, LocalDateTime::from);
+        LocalDateTime parseEndTime = dateTimeFormat.parse(endTime, LocalDateTime::from);
+
+        List<Activity> activities = activityRepository.findAllByStartTimeLessThanEqualAndEndTimeGreaterThanEqual(parseStartTime, parseEndTime);
+        return new ResponseEntity<>(activities, HttpStatus.OK);
+
+    }
 
 }

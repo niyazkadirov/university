@@ -10,7 +10,7 @@ public interface StudentService {
 
     ResponseEntity<Student> getStudentById(Long id) throws ResourceNotFoundException;
 
-    ResponseEntity<List<Student>> findStudent(Long age, String firstName, Boolean flag);
+    ResponseEntity<List<Student>> findStudent(Long age, String firstName, Boolean sortedFlag);
 
     void addStudent(Student student);
 

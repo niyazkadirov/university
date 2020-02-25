@@ -19,6 +19,7 @@ public class Activity {
     private String title;
     private Long audienceNumber;
     private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "activity", cascade = CascadeType.ALL)

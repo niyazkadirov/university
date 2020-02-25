@@ -24,7 +24,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResponseEntity<List<Student>> findStudent(Long age, String firstName, Boolean flag) {
+    public ResponseEntity<List<Student>> findStudent(Long age, String firstName, Boolean sortedFlag) {
 
         if (age != null & firstName != null) {
             List<Student> students = studentRepository.findByFirstNameContainingAndBirthDateBefore(firstName, LocalDate.now().minusYears(age));
@@ -33,7 +33,7 @@ public class StudentServiceImpl implements StudentService {
             List<Student> students = studentRepository.findByBirthDateBefore(LocalDate.now().minusYears(age));
             return new ResponseEntity<>(students, HttpStatus.OK);
         } else if (firstName != null) {
-            if (!flag) {
+            if (!sortedFlag) {
                 List<Student> students = studentRepository.findByFirstNameContainingOrderByFirstNameDesc(firstName);
                 return new ResponseEntity<>(students, HttpStatus.OK);
             } else {

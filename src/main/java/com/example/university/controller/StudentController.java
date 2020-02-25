@@ -25,8 +25,8 @@ public class StudentController {
     @GetMapping(value = "/list")
     public ResponseEntity<List<Student>> getStudentsAgeGreater(@RequestParam(required = false) Long age,
                                                                @RequestParam(required = false) String firstName,
-                                                               @RequestParam(required = false, defaultValue = "true") Boolean flag) {
-        return studentService.findStudent(age, firstName, flag);
+                                                               @RequestParam(required = false, defaultValue = "true") Boolean sortedFlag) {
+        return studentService.findStudent(age, firstName, sortedFlag);
     }
 
     @PostMapping()
