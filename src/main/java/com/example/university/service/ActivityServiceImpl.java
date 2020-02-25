@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -34,9 +35,14 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public ResponseEntity<List<Activity>> getAllByStartTimeBetween(LocalDateTime startTime, LocalDateTime endTime) {
-        List<Activity> activities = activityRepository.findAllByStartTimeLessThanEqualAndEndTimeGreaterThanEqual(startTime, endTime);
-        return new ResponseEntity<>(activities, HttpStatus.OK);
+        List<Activity> activities = activityRepository.findAll();
+
+        List<Activity> sortedActivities = activities
+                .stream()
+                .filter(activity -> activity.getStartTime().isBefore(startTime) & activity.getEndTime().isAfter(endTime))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(sortedActivities, HttpStatus.OK);
 
     }
-
 }

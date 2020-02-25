@@ -1,14 +1,14 @@
 package com.example.university.service;
 
-import com.example.university.exception.ResourceNotFoundException;
 import com.example.university.model.Student;
+import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface StudentService {
 
-    ResponseEntity<Student> getStudentById(Long id) throws ResourceNotFoundException;
+    ResponseEntity<Student> getStudentById(Long id) throws NotFoundException;
 
     ResponseEntity<List<Student>> findStudent(Long age, String firstName, Boolean sortedFlag);
 

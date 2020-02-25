@@ -1,8 +1,8 @@
 package com.example.university.service;
 
-import com.example.university.exception.ResourceNotFoundException;
 import com.example.university.model.Student;
 import com.example.university.repository.StudentRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public ResponseEntity<Student> getStudentById(Long id) throws ResourceNotFoundException {
-        Student student = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("student for id" + id + "does not exist"));
+    public ResponseEntity<Student> getStudentById(Long id) throws NotFoundException {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new NotFoundException("student for id" + id + "does not exist"));
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
