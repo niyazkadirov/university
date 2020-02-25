@@ -28,7 +28,7 @@ public class ActivityController {
     }
 
     @GetMapping
-    public ResponseEntity<Set<Student>> getAllStudentsActivityById(@RequestParam() Long id) throws NotFoundException {
+    public ResponseEntity<List<Student>> getAllStudentsActivityById(@RequestParam() Long id) throws NotFoundException {
         return activityService.getAllStudentsActivityById(id);
     }
 }

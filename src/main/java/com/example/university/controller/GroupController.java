@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/group")
@@ -19,7 +19,7 @@ public class GroupController {
 
 
     @GetMapping(params = "id")
-    public ResponseEntity<Set<Student>> getAllStudentsByGroupId(@RequestParam() Long id) throws ResourceNotFoundException {
+    public ResponseEntity<List<Student>> getAllStudentsByGroupId(@RequestParam() Long id) throws ResourceNotFoundException {
         return groupService.getAllStudentsByGroupId(id);
     }
 

@@ -25,9 +25,9 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public ResponseEntity<Set<Student>> getAllStudentsActivityById(Long id) throws NotFoundException {
+    public ResponseEntity<List<Student>> getAllStudentsActivityById(Long id) throws NotFoundException {
         Activity activity = activityRepository.findById(id).orElseThrow(() -> new NotFoundException(""));
-        Set<Student> students = activity.getStudents();
+        List<Student> students = activity.getStudents();
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 

@@ -12,5 +12,5 @@ public interface ActivityService {
 
     ResponseEntity<List<Activity>> getAllActivity();
 
-    ResponseEntity<Set<Student>> getAllStudentsActivityById(Long id) throws NotFoundException;
+    ResponseEntity<List<Student>> getAllStudentsActivityById(Long id) throws NotFoundException;
 }
