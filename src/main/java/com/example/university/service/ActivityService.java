@@ -6,6 +6,7 @@ import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -15,5 +16,7 @@ public interface ActivityService {
 
     ResponseEntity<Set<Student>> getAllStudentsActivityById(Long id) throws NotFoundException;
 
-    ResponseEntity<List<Activity>> getAllByStartTimeBetween(LocalDateTime startTime, LocalDateTime endTime);
+    ResponseEntity<List<Activity>> getAllByStartTimeBetween(LocalTime startTime, LocalTime endTime);
+
+    void addActivity(Activity activity);
 }

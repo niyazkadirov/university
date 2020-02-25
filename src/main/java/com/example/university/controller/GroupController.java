@@ -1,9 +1,9 @@
 package com.example.university.controller;
 
-import com.example.university.exception.ResourceNotFoundException;
 import com.example.university.model.Group;
 import com.example.university.model.Student;
 import com.example.university.service.GroupService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class GroupController {
 
 
     @GetMapping(params = "id")
-    public ResponseEntity<Set<Student>> getAllStudentsByGroupId(@RequestParam() Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Set<Student>> getAllStudentsByGroupId(@RequestParam() Long id) throws NotFoundException {
         return groupService.getAllStudentsByGroupId(id);
     }
 

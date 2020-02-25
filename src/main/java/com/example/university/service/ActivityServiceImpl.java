@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -33,10 +35,19 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public ResponseEntity<List<Activity>> getAllByStartTimeBetween(LocalDateTime startTime, LocalDateTime endTime) {
-        List<Activity> activities = activityRepository.findAllByStartTimeLessThanEqualAndEndTimeGreaterThanEqual(startTime, endTime);
-        return new ResponseEntity<>(activities, HttpStatus.OK);
+    public ResponseEntity<List<Activity>> getAllByStartTimeBetween(LocalTime endTime, LocalTime startTime) {
+        List<Activity> activities = activityRepository.findAll();
 
+        List<Activity> sortedActivities = activities
+                .stream()
+                .filter(activity -> activity.getStartTime().isBefore(endTime) & activity.getEndTime().isAfter(startTime))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(sortedActivities, HttpStatus.OK);
     }
 
+    @Override
+    public void addActivity(Activity activity){
+        activityRepository.save(activity);
+    }
 }

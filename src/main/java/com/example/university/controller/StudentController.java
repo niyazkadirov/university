@@ -1,8 +1,8 @@
 package com.example.university.controller;
 
-import com.example.university.exception.ResourceNotFoundException;
 import com.example.university.model.Student;
 import com.example.university.service.StudentService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class StudentController {
 
 
     @GetMapping(value = "/id")
-    public ResponseEntity<Student> getStudentById(@RequestParam Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Student> getStudentById(@RequestParam Long id) throws NotFoundException {
         return studentService.getStudentById(id);
     }
 

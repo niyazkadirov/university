@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Getter
@@ -15,11 +16,20 @@ import java.util.Set;
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "audience_number")
     private Long audienceNumber;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+
+    @Column(name = "start_time", columnDefinition = "TIME")
+    private LocalTime startTime;
+
+    @Column(name = "end_time", columnDefinition = "TIME")
+    private LocalTime endTime;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "activity", cascade = CascadeType.ALL)

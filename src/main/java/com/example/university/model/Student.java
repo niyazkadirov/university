@@ -21,7 +21,7 @@ public class Student {
     private String lastName;
     @Column(name = "gender")
     private Gender gender;
-    @Column(name = "birth_date")
+    @Column(name = "birth_date", columnDefinition = "date")
     private LocalDate birthDate;
 
 
