@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -23,5 +22,5 @@ public class Activity {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "activity", cascade = CascadeType.ALL)
-    private List<Student> students;
+    private Set<Student> students;
 }

@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -19,9 +18,9 @@ public class GroupServiceImpl implements GroupService {
     GroupRepository groupRepository;
 
     @Override
-    public ResponseEntity<List<Student>> getAllStudentsByGroupId(Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Set<Student>> getAllStudentsByGroupId(Long id) throws ResourceNotFoundException {
         Group group = groupRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("student for id" + id + "does not exist"));
-        List<Student> students = group.getStudents();
+        Set<Student> students = group.getStudents();
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
