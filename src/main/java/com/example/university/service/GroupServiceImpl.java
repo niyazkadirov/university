@@ -1,7 +1,7 @@
 package com.example.university.service;
 
-import com.example.university.model.Group;
-import com.example.university.model.Student;
+import com.example.university.entity.Group;
+import com.example.university.entity.Student;
 import com.example.university.repository.GroupRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.university.util;
+package com.example.university.entity.enumeration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

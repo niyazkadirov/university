@@ -1,6 +1,6 @@
 package com.example.university.service;
 
-import com.example.university.model.Student;
+import com.example.university.entity.Student;
 import com.example.university.repository.StudentRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -26,6 +27,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ResponseEntity<List<Student>> findStudent(Long age, String firstName, Boolean sortedFlag) {
 
+
+        //refactor
         if (age != null & firstName != null) {
             List<Student> students = studentRepository.findByFirstNameContainingAndBirthDateBefore(firstName, LocalDate.now().minusYears(age));
             return new ResponseEntity<>(students, HttpStatus.OK);

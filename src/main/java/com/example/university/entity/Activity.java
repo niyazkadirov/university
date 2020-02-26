@@ -1,11 +1,10 @@
-package com.example.university.model;
+package com.example.university.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public class Activity {
     @Column(name = "end_time", columnDefinition = "TIME")
     private LocalTime endTime;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "activity", cascade = CascadeType.ALL)
     private Set<Student> students;
 }
