@@ -52,6 +52,4 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(student);
     }
 
-
-
 }

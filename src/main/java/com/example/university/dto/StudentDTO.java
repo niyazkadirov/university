@@ -9,5 +9,8 @@ import lombok.Setter;
 public class StudentDTO {
     private String firstName;
     private String lastName;
-    private Group group;
+
+    private String title;
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.university.entity;
 
 import com.example.university.entity.enumeration.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,11 +25,12 @@ public class Student {
     @Column(name = "birth_date", columnDefinition = "date")
     private LocalDate birthDate;
 
-
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "activity_id")
     private Activity activity;

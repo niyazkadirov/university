@@ -1,5 +1,6 @@
 package com.example.university.controller;
 
+import com.example.university.dto.LectureDTO;
 import com.example.university.entity.Activity;
 import com.example.university.entity.Student;
 import com.example.university.service.ActivityService;
@@ -39,5 +40,10 @@ public class ActivityController {
     @PostMapping
     public void addActivity(Activity activity) {
         activityService.addActivity(activity);
+    }
+
+    @GetMapping(value = "/journal")
+    public ResponseEntity<List<LectureDTO>> getJournal() {
+        return activityService.getJournal();
     }
 }

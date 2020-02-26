@@ -30,7 +30,7 @@ public class Activity {
     @Column(name = "end_time", columnDefinition = "TIME")
     private LocalTime endTime;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "activity", cascade = CascadeType.ALL)
     private Set<Student> students;
 }
