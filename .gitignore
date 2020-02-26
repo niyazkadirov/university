@@ -31,8 +31,8 @@ build/
 .vscode/
 
 # general HSQL database files
-*Db.properties
-*Db.script
+.properties
+.script
 
 # logs
 /stacktrace.log
