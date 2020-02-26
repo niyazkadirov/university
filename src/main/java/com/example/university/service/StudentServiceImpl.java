@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-@Slf4j
+
 @Service
 public class StudentServiceImpl implements StudentService {
 
@@ -22,7 +22,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ResponseEntity<Student> getStudentById(Long id) throws NotFoundException {
         Student student = studentRepository.findById(id).orElseThrow(() -> new NotFoundException("student for id" + id + "does not exist"));
-        log.info("asdasdas");
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
