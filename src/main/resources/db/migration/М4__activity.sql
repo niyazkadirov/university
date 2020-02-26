@@ -1,0 +1,3 @@
+INSERT INTO public.activity (id, audience_number, title, end_time, start_time) VALUES (1, 201, 'Computer science', '13:20:00', '12:00:00');
+INSERT INTO public.activity (id, audience_number, title, end_time, start_time) VALUES (3, 123, 'Security', '16:20:00', '15:00:00');
+INSERT INTO public.activity (id, audience_number, title, end_time, start_time) VALUES (2, 543, 'English', '10:20:00', '09:00:00');
