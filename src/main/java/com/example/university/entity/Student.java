@@ -1,6 +1,6 @@
-package com.example.university.model;
+package com.example.university.entity;
 
-import com.example.university.util.Gender;
+import com.example.university.entity.enumeration.Gender;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,11 +1,10 @@
 package com.example.university.service;
 
-import com.example.university.model.Activity;
-import com.example.university.model.Student;
+import com.example.university.entity.Activity;
+import com.example.university.entity.Student;
 import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
