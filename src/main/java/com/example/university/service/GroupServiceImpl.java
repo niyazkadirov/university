@@ -4,24 +4,22 @@ import com.example.university.entity.Group;
 import com.example.university.entity.Student;
 import com.example.university.repository.GroupRepository;
 import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService {
 
-    @Autowired
-    GroupRepository groupRepository;
+    private final GroupRepository groupRepository;
+
 
     @Override
-    public ResponseEntity<Set<Student>> getAllStudentsByGroupId(Long id) throws NotFoundException {
+    public Set<Student> getAllStudentsByGroupId(Long id) throws NotFoundException {
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(""));
-        Set<Student> students = group.getStudents();
-        return new ResponseEntity<>(students, HttpStatus.OK);
+        return group.getStudents();
     }
 
     @Override

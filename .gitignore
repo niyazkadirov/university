@@ -52,3 +52,4 @@ build/
 
 # "temporary" build files
 /target
+/src/main/resources/application.properties
