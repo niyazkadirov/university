@@ -12,13 +12,13 @@ import java.util.Set;
 
 public interface ActivityService {
 
-    ResponseEntity<List<Activity>> getAllActivity();
+    List<Activity> getAllActivity();
 
-    ResponseEntity<Set<Student>> getAllStudentsActivityById(Long id) throws NotFoundException;
+    Set<Student> getAllStudentsActivityById(Long id) throws NotFoundException;
 
-    ResponseEntity<List<Activity>> getAllByStartTimeBetween(LocalTime startTime, LocalTime endTime);
+    List<Activity> getAllByStartTimeBetween(LocalTime startTime, LocalTime endTime);
 
     void addActivity(Activity activity);
 
-    public ResponseEntity<List<LectureDTO>> getJournal();
+    public List<LectureDTO> getJournal();
 }

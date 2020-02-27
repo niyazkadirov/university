@@ -7,6 +7,7 @@ import com.example.university.service.ActivityService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,18 +24,21 @@ public class ActivityController {
 
     @GetMapping("/")
     public ResponseEntity<List<Activity>> getAllActivity() {
-        return activityService.getAllActivity();
+        List<Activity> activities = activityService.getAllActivity();
+        return new ResponseEntity<>(activities, HttpStatus.OK);
     }
 
     @GetMapping("/student")
     public ResponseEntity<Set<Student>> getAllStudentsActivityById(@RequestParam() Long id) throws NotFoundException {
-        return activityService.getAllStudentsActivityById(id);
+        Set<Student> students = activityService.getAllStudentsActivityById(id);
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     @GetMapping("/date")
     public ResponseEntity<List<Activity>> getAllByStartTimeBetween(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
                                                                    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime) {
-        return activityService.getAllByStartTimeBetween(endTime, startTime);
+        List<Activity> activities = activityService.getAllByStartTimeBetween(endTime, startTime);
+        return new ResponseEntity<>(activities, HttpStatus.OK);
     }
 
     @PostMapping
@@ -44,6 +48,7 @@ public class ActivityController {
 
     @GetMapping(value = "/journal")
     public ResponseEntity<List<LectureDTO>> getJournal() {
-        return activityService.getJournal();
+        List<LectureDTO> journal = activityService.getJournal();
+        return new ResponseEntity<>(journal, HttpStatus.OK);
     }
 }

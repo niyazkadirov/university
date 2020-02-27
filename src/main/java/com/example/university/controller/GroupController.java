@@ -5,6 +5,7 @@ import com.example.university.entity.Student;
 import com.example.university.service.GroupService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,8 @@ public class GroupController {
 
     @GetMapping(params = "id")
     public ResponseEntity<Set<Student>> getAllStudentsByGroupId(@RequestParam() Long id) throws NotFoundException {
-        return groupService.getAllStudentsByGroupId(id);
+        Set<Student> students = groupService.getAllStudentsByGroupId(id);
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     @PostMapping()

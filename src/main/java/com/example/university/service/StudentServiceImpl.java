@@ -4,8 +4,6 @@ import com.example.university.entity.Student;
 import com.example.university.repository.StudentRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,33 +17,27 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public ResponseEntity<Student> getStudentById(Long id) throws NotFoundException {
-        Student student = studentRepository.findById(id).orElseThrow(() -> new NotFoundException("student for id" + id + "does not exist"));
-        return new ResponseEntity<>(student, HttpStatus.OK);
+    public Student getStudentById(Long id) throws NotFoundException {
+        return studentRepository.findById(id).orElseThrow(() -> new NotFoundException("student for id" + id + "does not exist"));
     }
 
     @Override
-    public ResponseEntity<List<Student>> findStudent(Long age, String firstName, Boolean sortedFlag) {
+    public List<Student> findStudent(Long age, String firstName, Boolean sortedFlag) {
 
 
         //refactor
         if (age != null & firstName != null) {
-            List<Student> students = studentRepository.findByFirstNameContainingAndBirthDateBefore(firstName, LocalDate.now().minusYears(age));
-            return new ResponseEntity<>(students, HttpStatus.OK);
+            return studentRepository.findByFirstNameContainingAndBirthDateBefore(firstName, LocalDate.now().minusYears(age));
         } else if (age != null) {
-            List<Student> students = studentRepository.findByBirthDateBefore(LocalDate.now().minusYears(age));
-            return new ResponseEntity<>(students, HttpStatus.OK);
+            return studentRepository.findByBirthDateBefore(LocalDate.now().minusYears(age));
         } else if (firstName != null) {
             if (!sortedFlag) {
-                List<Student> students = studentRepository.findByFirstNameContainingOrderByFirstNameDesc(firstName);
-                return new ResponseEntity<>(students, HttpStatus.OK);
+                return studentRepository.findByFirstNameContainingOrderByFirstNameDesc(firstName);
             } else {
-                List<Student> students = studentRepository.findByFirstNameContainingOrderByFirstNameAsc(firstName);
-                return new ResponseEntity<>(students, HttpStatus.OK);
+                return studentRepository.findByFirstNameContainingOrderByFirstNameAsc(firstName);
             }
         } else {
-            List<Student> students = studentRepository.findAll();
-            return new ResponseEntity<>(students, HttpStatus.OK);
+            return studentRepository.findAll();
         }
     }
 

@@ -18,10 +18,9 @@ public class GroupServiceImpl implements GroupService {
     GroupRepository groupRepository;
 
     @Override
-    public ResponseEntity<Set<Student>> getAllStudentsByGroupId(Long id) throws NotFoundException {
+    public Set<Student> getAllStudentsByGroupId(Long id) throws NotFoundException {
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(""));
-        Set<Student> students = group.getStudents();
-        return new ResponseEntity<>(students, HttpStatus.OK);
+        return group.getStudents();
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface GroupService {
 
-    ResponseEntity<Set<Student>> getAllStudentsByGroupId(Long id) throws  NotFoundException;
+    Set<Student> getAllStudentsByGroupId(Long id) throws  NotFoundException;
 
     void addGroup(Group group);
 }
