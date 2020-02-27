@@ -4,7 +4,6 @@ import com.example.university.dto.LectureDTO;
 import com.example.university.entity.Activity;
 import com.example.university.entity.Student;
 import javassist.NotFoundException;
-import org.springframework.http.ResponseEntity;
 
 import java.time.LocalTime;
 import java.util.List;

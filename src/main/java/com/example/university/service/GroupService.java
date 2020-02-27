@@ -3,7 +3,6 @@ package com.example.university.service;
 import com.example.university.entity.Group;
 import com.example.university.entity.Student;
 import javassist.NotFoundException;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Set;
 
