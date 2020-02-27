@@ -1,6 +1,5 @@
 package com.example.university.service;
 
-import com.example.university.entity.Student;
 import com.example.university.repository.StudentRepository;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
