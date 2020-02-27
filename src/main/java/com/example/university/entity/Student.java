@@ -38,4 +38,12 @@ public class Student {
     @ManyToOne()
     @JoinColumn(name = "activity_id")
     private Activity activity;
+
+
+    public Student(String firstName, String lastName, Gender gender, LocalDate birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+    }
 }
