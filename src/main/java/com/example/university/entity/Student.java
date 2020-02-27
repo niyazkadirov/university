@@ -39,6 +39,7 @@ public class Student {
     @JoinColumn(name = "activity_id")
     private Activity activity;
 
+
     public Student(String firstName, String lastName, Gender gender, LocalDate birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
