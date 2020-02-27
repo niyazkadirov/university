@@ -40,10 +40,8 @@ public class Student {
     private Activity activity;
 
 
-    public Student(String firstName, String lastName, Gender gender, LocalDate birthDate) {
+    public Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gender = gender;
-        this.birthDate = birthDate;
     }
 }

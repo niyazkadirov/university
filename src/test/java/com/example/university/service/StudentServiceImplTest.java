@@ -10,11 +10,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -28,11 +30,15 @@ class StudentServiceImplTest {
     private StudentServiceImpl studentService;
 
     @Test
-    void addedStudentMustNotBeNull() {
+    void addedStudentMustBeNotNull() {
         Student student = new Student();
         student.setFirstName("Bob");
         when(studentRepository.save(Mockito.any(Student.class))).then(returnsFirstArg());
         Student savedStudent = studentService.addStudent(student);
         Assert.assertNotNull(savedStudent.getFirstName());
+        Assert.assertEquals(savedStudent.getFirstName(), "Bob");
+        Mockito.verify(studentRepository, Mockito.times(1)).save(student);
     }
+
+
 }
