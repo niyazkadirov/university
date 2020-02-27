@@ -5,6 +5,7 @@ import com.example.university.entity.Activity;
 import com.example.university.entity.Student;
 import com.example.university.service.ActivityService;
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -17,10 +18,10 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/activity")
+@RequiredArgsConstructor
 public class ActivityController {
 
-    @Autowired
-    private ActivityService activityService;
+    private final ActivityService activityService;
 
     @GetMapping("/")
     public ResponseEntity<List<Activity>> getAllActivity() {
@@ -31,7 +32,7 @@ public class ActivityController {
     @GetMapping("/student")
     public ResponseEntity<Set<Student>> getAllStudentsActivityById(@RequestParam() Long id) throws NotFoundException {
         Set<Student> students = activityService.getAllStudentsActivityById(id);
-        return new ResponseEntity<>(students, HttpStatus.OK);
+        return new ResponseEntity<>(students, HttpStatus.OK) ;
     }
 
     @GetMapping("/date")

@@ -4,6 +4,7 @@ import com.example.university.entity.Group;
 import com.example.university.entity.Student;
 import com.example.university.service.GroupService;
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,10 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/group")
+@RequiredArgsConstructor
 public class GroupController {
 
-    @Autowired
-    private GroupService groupService;
+    private final GroupService groupService;
 
 
     @GetMapping(params = "id")

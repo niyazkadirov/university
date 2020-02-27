@@ -2,7 +2,9 @@ package com.example.university.entity;
 
 import com.example.university.entity.enumeration.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Student {
 
@@ -34,4 +38,11 @@ public class Student {
     @ManyToOne()
     @JoinColumn(name = "activity_id")
     private Activity activity;
+
+    public Student(String firstName, String lastName, Gender gender, LocalDate birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDate = birthDate;
+    }
 }

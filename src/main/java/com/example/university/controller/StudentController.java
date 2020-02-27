@@ -3,6 +3,7 @@ package com.example.university.controller;
 import com.example.university.entity.Student;
 import com.example.university.service.StudentService;
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/student")
+@RequiredArgsConstructor
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
-
+    private final StudentService studentService;
 
     @GetMapping(value = "/id")
     public ResponseEntity<Student> getStudentById(@RequestParam Long id) throws NotFoundException {

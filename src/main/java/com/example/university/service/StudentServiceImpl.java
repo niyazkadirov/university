@@ -3,7 +3,7 @@ package com.example.university.service;
 import com.example.university.entity.Student;
 import com.example.university.repository.StudentRepository;
 import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,10 +11,10 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     @Override
     public Student getStudentById(Long id) throws NotFoundException {
@@ -25,7 +25,7 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findStudent(Long age, String firstName, Boolean sortedFlag) {
 
 
-        //refactor
+        //need refactor
         if (age != null & firstName != null) {
             return studentRepository.findByFirstNameContainingAndBirthDateBefore(firstName, LocalDate.now().minusYears(age));
         } else if (age != null) {
