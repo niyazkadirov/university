@@ -1,8 +1,5 @@
 package com.example.university.controller;
 
-import com.example.university.entity.Student;
-import com.example.university.entity.enumeration.Gender;
-import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +10,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,9 +33,6 @@ class StudentControllerTest {
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
     }
 
-    @Test
-    void getStudentsAgeGreater() {
-    }
 
     @Test
     void addStudent() throws Exception {
@@ -48,7 +44,6 @@ class StudentControllerTest {
                 "            }";
 
         mockMvc.perform(post("/student")
-
                 .contentType(MediaType.APPLICATION_JSON).content(studentJson))
                 .andExpect(status().isOk()).andDo(print());
 

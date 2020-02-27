@@ -7,7 +7,10 @@ import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -33,7 +36,7 @@ class ActivityServiceImplTest {
     }
 
     @BeforeEach
-    public void initActivityList(){
+    public void initActivityList() {
         Activity activity1 = new Activity();
         activity1.setStartTime(LocalTime.of(9, 0));
         activity1.setEndTime(LocalTime.of(10, 20));
