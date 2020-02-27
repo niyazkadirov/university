@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -17,8 +18,8 @@ public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
 
     @Override
-    public Student getStudentById(Long id) throws NotFoundException {
-        return studentRepository.findById(id).orElseThrow(() -> new NotFoundException("student for id" + id + "does not exist"));
+    public Optional<Student> getStudentById(Long id) {
+        return studentRepository.findById(id);
     }
 
     @Override
@@ -42,8 +43,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addStudent(Student student) {
-        studentRepository.save(student);
+    public Student addStudent(Student student) {
+        return studentRepository.save(student);
     }
 
 }

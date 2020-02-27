@@ -4,13 +4,14 @@ import com.example.university.entity.Student;
 import javassist.NotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentService {
 
-    Student getStudentById(Long id) throws NotFoundException;
+    Optional<Student> getStudentById(Long id) throws NotFoundException;
 
     List<Student> findStudent(Long age, String firstName, Boolean sortedFlag);
 
-    void addStudent(Student student);
+    Student addStudent(Student student);
 
 }

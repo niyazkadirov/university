@@ -1,34 +1,38 @@
 package com.example.university.service;
 
 import com.example.university.entity.Student;
-import com.example.university.entity.enumeration.Gender;
 import com.example.university.repository.StudentRepository;
-import org.junit.jupiter.api.BeforeEach;
+import javassist.NotFoundException;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDate;
+import java.util.Optional;
 
-@ExtendWith(MockitoExtension.class)
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.Mockito.when;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 class StudentServiceImplTest {
 
     @Mock
     private StudentRepository studentRepository;
+
     @InjectMocks
     private StudentServiceImpl studentService;
 
-    @BeforeEach
-    void initStudentServiceImpl(){
-        studentService = new StudentServiceImpl(studentRepository);
-    }
-
     @Test
-    void addStudent() {
-        Student student = new Student("Niyaz", "Kadirov", Gender.MALE, LocalDate.now());
-        Mockito.when(studentRepository.save(Mockito.any(Student.class)));
+    void addedStudentMustNotBeNull() {
+        Student student = new Student();
+        student.setFirstName("Bob");
+        when(studentRepository.save(Mockito.any(Student.class))).then(returnsFirstArg());
+        Student savedStudent = studentService.addStudent(student);
+        Assert.assertNotNull(savedStudent.getFirstName());
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
@@ -18,8 +19,8 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping(value = "/id")
-    public ResponseEntity<Student> getStudentById(@RequestParam Long id) throws NotFoundException {
-        Student student = studentService.getStudentById(id);
+    public ResponseEntity<Optional<Student>> getStudentById(@RequestParam Long id) throws NotFoundException {
+        Optional<Student> student = studentService.getStudentById(id);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
@@ -32,7 +33,7 @@ public class StudentController {
     }
 
     @PostMapping()
-    public void addStudent(@RequestBody Student student) {
-        studentService.addStudent(student);
+    public Student addStudent(@RequestBody Student student) {
+        return studentService.addStudent(student);
     }
 }
