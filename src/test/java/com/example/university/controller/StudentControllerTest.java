@@ -36,6 +36,8 @@ class StudentControllerTest {
 
     @Test
     void addStudent() throws Exception {
+
+
         String studentJson = "{\n" +
                 "                \"firstName\": \"test\",\n" +
                 "                \"lastName\": \"test\",\n" +
