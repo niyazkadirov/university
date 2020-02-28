@@ -2,30 +2,24 @@ package com.example.university.service;
 
 import com.example.university.entity.Student;
 import com.example.university.repository.StudentRepository;
-import org.aspectj.lang.annotation.Before;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+
+@ExtendWith(MockitoExtension.class)
 class StudentServiceImplTest {
+    @Mock
+    private StudentRepository mockedStudentRepository;
 
-    private StudentRepository mockedStudentRepository = mock(StudentRepository.class);
-
-
+    @InjectMocks
     private StudentServiceImpl studentService;
-
-
-    @BeforeEach
-    public void setUp() {
-        studentService = new StudentServiceImpl(mockedStudentRepository);
-    }
 
     @Test
     void addedStudentMustBeNotNull() {
@@ -40,6 +34,4 @@ class StudentServiceImplTest {
 
         Mockito.verify(mockedStudentRepository, Mockito.times(1)).save(student);
     }
-
-
 }
