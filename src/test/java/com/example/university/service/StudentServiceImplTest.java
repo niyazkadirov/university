@@ -3,20 +3,16 @@ package com.example.university.service;
 import com.example.university.entity.Student;
 import com.example.university.repository.StudentRepository;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 class StudentServiceImplTest {
 
     @Mock
@@ -24,11 +20,7 @@ class StudentServiceImplTest {
 
     @InjectMocks
     private StudentServiceImpl studentService;
-
-    @Before
-    public void initMocks() {
-        MockitoAnnotations.initMocks(this);
-    }
+    
 
     @Test
     void addedStudentMustBeNotNull() {
