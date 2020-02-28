@@ -18,19 +18,19 @@ class StudentServiceImplTest {
     @Mock
     private StudentRepository mockedStudentRepository;
 
+    @Mock
+    Student student;
+
     @InjectMocks
     private StudentServiceImpl studentService;
 
     @Test
     void addedStudentMustBeNotNull() {
-        Student student = new Student();
-        student.setFirstName("Bob");
         when(mockedStudentRepository.save(Mockito.any(Student.class))).thenReturn(student);
 
         Student savedStudent = studentService.addStudent(student);
 
-        Assert.assertNotNull(savedStudent.getFirstName());
-        Assert.assertEquals(savedStudent.getFirstName(), "Bob");
+        Assert.assertEquals(savedStudent, student);
 
         Mockito.verify(mockedStudentRepository, Mockito.times(1)).save(student);
     }
