@@ -28,11 +28,6 @@ public class ActivityController {
         return new ResponseEntity<>(activities, HttpStatus.OK);
     }
 
-    @GetMapping("/student")
-    public ResponseEntity<Set<Student>> getAllStudentsActivityById(@RequestParam() Long id) throws NotFoundException {
-        Set<Student> students = activityService.getAllStudentsActivityById(id);
-        return new ResponseEntity<>(students, HttpStatus.OK) ;
-    }
 
     @GetMapping("/date")
     public ResponseEntity<List<Activity>> getAllByStartTimeBetween(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,

@@ -14,5 +14,5 @@ public class LectureDTO {
     LocalTime startTime;
     LocalTime endTime;
     Duration duration;
-    List<StudentDTO> studentsDTO;
+    List<GroupDTO> groupDTO;
 }

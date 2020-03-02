@@ -30,4 +30,8 @@ public class Group {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
     private Set<Student> students;
 
+    @ManyToOne()
+    @JoinColumn(name = "activity_id")
+    private Activity activity;
+
 }

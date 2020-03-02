@@ -7,14 +7,10 @@ import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -49,6 +45,8 @@ class ActivityServiceImplTest {
         activityList.add(activity1);
         activityList.add(activity2);
         activityList.add(activity3);
+
+        Mockito.when(activityRepository.findAll()).thenReturn(activityList);
     }
 
 
@@ -57,7 +55,6 @@ class ActivityServiceImplTest {
         LocalTime endTime = LocalTime.of(14, 20);
         LocalTime startTime = LocalTime.of(10, 20);
 
-        Mockito.when(activityRepository.findAll()).thenReturn(activityList);
         List<Activity> filteredActivitiesList = activityService.getAllByStartTimeBetween(endTime, startTime);
         Assert.assertEquals(filteredActivitiesList.size(), 2);
 

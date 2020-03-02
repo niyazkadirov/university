@@ -19,7 +19,7 @@ class StudentServiceImplTest {
     private StudentRepository mockedStudentRepository;
 
     @Mock
-    Student student;
+    private Student student = Mockito.mock(Student.class);
 
     @InjectMocks
     private StudentServiceImpl studentService;
