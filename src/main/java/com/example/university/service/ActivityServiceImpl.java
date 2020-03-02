@@ -1,11 +1,12 @@
 package com.example.university.service;
 
+import com.example.university.dto.GroupDTO;
 import com.example.university.dto.LectureDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.entity.Activity;
+import com.example.university.entity.Group;
 import com.example.university.entity.Student;
 import com.example.university.repository.ActivityRepository;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,6 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,12 +28,6 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public List<Activity> getAllActivity() {
         return activityRepository.findAll();
-    }
-
-    @Override
-    public Set<Student> getAllStudentsActivityById(Long id) throws NotFoundException {
-        Activity activity = activityRepository.findById(id).orElseThrow(() -> new NotFoundException(""));
-        return activity.getStudents();
     }
 
     @Override
@@ -61,15 +55,23 @@ public class ActivityServiceImpl implements ActivityService {
             LectureDTO lectureDTO = modelMapper.map(activity, LectureDTO.class);
             lectureDTO.setDuration(Duration.between(activity.getEndTime(), activity.getStartTime()));
 
-            List<StudentDTO> studentDTOList = new ArrayList<>();
+            List<GroupDTO> groupDTOList = new ArrayList<>();
 
-            for (Student student : activity.getStudents()) {
-                StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
-                studentDTO.setTitle(student.getGroup().getTitle());
-                studentDTOList.add(studentDTO);
+            for (Group group : activity.getGroups()) {
+                GroupDTO groupDTO = modelMapper.map(group, GroupDTO.class);
+
+                List<StudentDTO> studentDTOList = new ArrayList<>();
+                for (Student student : group.getStudents()) {
+                    StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
+                    studentDTOList.add(studentDTO);
+                }
+
+                groupDTO.setStudentList(studentDTOList);
+                groupDTOList.add(groupDTO);
             }
+            lectureDTO.setGroupDTO(groupDTOList);
 
-            lectureDTO.setStudentsDTO(studentDTOList);
+
             lectureDTOList.add(lectureDTO);
         }
         return lectureDTOList;

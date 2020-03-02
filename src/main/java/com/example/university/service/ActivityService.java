@@ -13,8 +13,6 @@ public interface ActivityService {
 
     List<Activity> getAllActivity();
 
-    Set<Student> getAllStudentsActivityById(Long id) throws NotFoundException;
-
     List<Activity> getAllByStartTimeBetween(LocalTime startTime, LocalTime endTime);
 
     void addActivity(Activity activity);

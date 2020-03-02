@@ -15,4 +15,5 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findByFirstNameContainingOrderByFirstNameDesc(String firstName);
 
     List<Student> findByFirstNameContainingAndBirthDateBefore(String firstName, LocalDate birthDate);
+
 }

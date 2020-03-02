@@ -34,11 +34,6 @@ public class Student {
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @JsonIgnore
-    @ManyToOne()
-    @JoinColumn(name = "activity_id")
-    private Activity activity;
-
 
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
