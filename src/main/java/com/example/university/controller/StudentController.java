@@ -28,7 +28,7 @@ public class StudentController {
     public ResponseEntity<List<Student>> getStudentsAgeGreater(@RequestParam(required = false) Long age,
                                                                @RequestParam(required = false) String firstName,
                                                                @RequestParam(required = false, defaultValue = "true") Boolean sortedFlag) {
-        List<Student> students = studentService.findStudent(age, firstName, sortedFlag);
+        List<Student> students = studentService.findAndSortedStudentByParams(age, firstName, sortedFlag);
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 

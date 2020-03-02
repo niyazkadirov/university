@@ -10,7 +10,7 @@ public interface StudentService {
 
     Optional<Student> getStudentById(Long id) throws NotFoundException;
 
-    List<Student> findStudent(Long age, String firstName, Boolean sortedFlag);
+    List<Student> findAndSortedStudentByParams(Long age, String firstName, Boolean sortedFlag);
 
     Student addStudent(Student student);
 

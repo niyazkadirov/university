@@ -3,6 +3,7 @@ package com.example.university.service;
 import com.example.university.entity.Student;
 import com.example.university.repository.StudentRepository;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,8 +11,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.when;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class StudentServiceImplTest {
@@ -19,19 +23,24 @@ class StudentServiceImplTest {
     private StudentRepository mockedStudentRepository;
 
     @Mock
-    private Student student = Mockito.mock(Student.class);
+    private List<Student> students;
 
     @InjectMocks
     private StudentServiceImpl studentService;
 
-    @Test
-    void addedStudentMustBeNotNull() {
-        when(mockedStudentRepository.save(Mockito.any(Student.class))).thenReturn(student);
 
-        Student savedStudent = studentService.addStudent(student);
-
-        Assert.assertEquals(savedStudent, student);
-
-        Mockito.verify(mockedStudentRepository, Mockito.times(1)).save(student);
+    @BeforeEach
+    public void setUp(){
+        when(mockedStudentRepository
+                .findByFirstNameContainingAndBirthDateBefore(Mockito.anyString(),
+                        Mockito.any(LocalDate.class))).thenReturn(students);
     }
+
+
+    @Test
+    public void findAndSortedStudentByParams_mustReturnStudentsWhoseNameContainsAndAgeMoreSortedAsc(){
+
+    }
+
+
 }

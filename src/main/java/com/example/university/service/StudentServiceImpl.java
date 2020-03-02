@@ -23,8 +23,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> findStudent(Long age, String firstName, Boolean sortedFlag) {
-
+    public List<Student> findAndSortedStudentByParams(Long age, String firstName, Boolean sortedFlag) {
 
         //need refactor
         if (age != null & firstName != null) {
