@@ -26,7 +26,7 @@ class StudentControllerTest {
 
     @Test
     void TestGetStudentById() throws Exception {
-        mockMvc.perform(get("/student/id?id={id}", "1"))
+        mockMvc.perform(get("/students/id?id={id}", "1"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value("1"))
@@ -45,7 +45,7 @@ class StudentControllerTest {
                 "                \"birthDate\": \"1998-01-16\"\n" +
                 "            }";
 
-        mockMvc.perform(post("/student")
+        mockMvc.perform(post("/students")
                 .contentType(MediaType.APPLICATION_JSON).content(studentJson))
                 .andExpect(status().isOk()).andDo(print());
 

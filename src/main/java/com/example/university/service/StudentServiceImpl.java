@@ -2,13 +2,13 @@ package com.example.university.service;
 
 import com.example.university.entity.Student;
 import com.example.university.repository.StudentRepository;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -39,6 +39,18 @@ public class StudentServiceImpl implements StudentService {
         } else {
             return studentRepository.findAll();
         }
+    }
+
+    @Override
+    public List<Student> getAllStudentsByGenderCode(Integer genderCode) {
+        if (genderCode == null) {
+            return studentRepository.findAll();
+        }
+
+        List<Student> students = studentRepository.findAll();
+        return students.stream()
+                .filter(student -> student.getGender().getCode() == genderCode)
+                .collect(Collectors.toList());
     }
 
     @Override

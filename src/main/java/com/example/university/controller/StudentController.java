@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 @RequiredArgsConstructor
 public class StudentController {
 
@@ -35,5 +35,11 @@ public class StudentController {
     @PostMapping()
     public Student addStudent(@RequestBody Student student) {
         return studentService.addStudent(student);
+    }
+
+    @GetMapping(value = "/sorted")
+    public ResponseEntity<List<Student>> getAllStudentsByGenderCode(@RequestParam Integer genderCode){
+        List<Student> students = studentService.getAllStudentsByGenderCode(genderCode);
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 }

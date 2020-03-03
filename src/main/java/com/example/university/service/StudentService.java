@@ -14,4 +14,5 @@ public interface StudentService {
 
     Student addStudent(Student student);
 
+    List<Student> getAllStudentsByGenderCode(Integer genderCode);
 }
