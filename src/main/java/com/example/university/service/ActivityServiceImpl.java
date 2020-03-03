@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class ActivityServiceImpl implements ActivityService {
 
     private final ActivityRepository activityRepository;
-    private final StudentService studentService;
 
     private final ModelMapper modelMapper;
 
@@ -39,10 +38,6 @@ public class ActivityServiceImpl implements ActivityService {
                 .stream()
                 .filter(activity -> activity.getStartTime().isBefore(endTime) & activity.getEndTime().isAfter(startTime))
                 .collect(Collectors.toList());
-    }
-
-    public StudentService getStudentService() {
-        return studentService;
     }
 
     @Override
@@ -74,9 +69,8 @@ public class ActivityServiceImpl implements ActivityService {
                 groupDTO.setStudentList(studentDTOList);
                 groupDTOList.add(groupDTO);
             }
+            
             lectureDTO.setGroupDTO(groupDTOList);
-
-
             lectureDTOList.add(lectureDTO);
         }
         return lectureDTOList;
