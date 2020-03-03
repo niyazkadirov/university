@@ -9,10 +9,10 @@ import java.util.List;
 
 @Getter
 @Setter
-public class LectureDTO {
+public class ActivityDTO {
     String title;
     LocalTime startTime;
     LocalTime endTime;
     Duration duration;
-    List<GroupDTO> groupDTO;
+    List<StudentDTO> studentDTO;
 }

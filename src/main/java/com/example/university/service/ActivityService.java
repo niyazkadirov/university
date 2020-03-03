@@ -1,6 +1,6 @@
 package com.example.university.service;
 
-import com.example.university.dto.LectureDTO;
+import com.example.university.dto.ActivityDTO;
 import com.example.university.entity.Activity;
 
 import java.time.LocalTime;
@@ -14,5 +14,5 @@ public interface ActivityService {
 
     void addActivity(Activity activity);
 
-    public List<LectureDTO> getJournal();
+    public List<ActivityDTO> getJournal();
 }

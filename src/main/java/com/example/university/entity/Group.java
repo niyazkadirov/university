@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -30,7 +31,7 @@ public class Group {
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
-    private Set<Student> students;
+    private List<Student> students;
 
     @ManyToOne()
     @JoinColumn(name = "activity_id")

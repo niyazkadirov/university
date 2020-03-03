@@ -7,6 +7,7 @@ import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -17,7 +18,7 @@ public class GroupServiceImpl implements GroupService {
 
 
     @Override
-    public Set<Student> getAllStudentsByGroupId(Long id) throws NotFoundException {
+    public List<Student> getAllStudentsByGroupId(Long id) throws NotFoundException {
         Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException(""));
         return group.getStudents();
     }

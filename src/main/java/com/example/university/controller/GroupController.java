@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -20,8 +21,8 @@ public class GroupController {
 
 
     @GetMapping(params = "id")
-    public ResponseEntity<Set<Student>> getAllStudentsByGroupId(@RequestParam() Long id) throws NotFoundException {
-        Set<Student> students = groupService.getAllStudentsByGroupId(id);
+    public ResponseEntity<List<Student>> getAllStudentsByGroupId(@RequestParam() Long id) throws NotFoundException {
+        List<Student> students = groupService.getAllStudentsByGroupId(id);
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 

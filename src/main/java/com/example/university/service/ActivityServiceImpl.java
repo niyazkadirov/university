@@ -1,7 +1,6 @@
 package com.example.university.service;
 
-import com.example.university.dto.GroupDTO;
-import com.example.university.dto.LectureDTO;
+import com.example.university.dto.ActivityDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.entity.Activity;
 import com.example.university.entity.Group;
@@ -47,32 +46,26 @@ public class ActivityServiceImpl implements ActivityService {
 
 
     @Override
-    public List<LectureDTO> getJournal() {
+    public List<ActivityDTO> getJournal() {
         List<Activity> activities = activityRepository.findAll();
-        List<LectureDTO> lectureDTOList = new ArrayList<>();
+        List<ActivityDTO> activityDTOList = new ArrayList<>();
+        List<StudentDTO> studentDTOList = new ArrayList<>();
 
         for (Activity activity : activities) {
-            LectureDTO lectureDTO = modelMapper.map(activity, LectureDTO.class);
-            lectureDTO.setDuration(Duration.between(activity.getEndTime(), activity.getStartTime()));
-
-            List<GroupDTO> groupDTOList = new ArrayList<>();
+            ActivityDTO activityDTO = modelMapper.map(activity, ActivityDTO.class);
+            activityDTO.setStudentDTO(studentDTOList);
+            activityDTO.setDuration(Duration.between(activity.getEndTime(), activity.getStartTime()));
 
             for (Group group : activity.getGroups()) {
-                GroupDTO groupDTO = modelMapper.map(group, GroupDTO.class);
-
-                List<StudentDTO> studentDTOList = new ArrayList<>();
-                for (Student student : group.getStudents()) {
+                List<Student> students = group.getStudents();
+                for (Student student : students) {
                     StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
                     studentDTOList.add(studentDTO);
                 }
-
-                groupDTO.setStudentList(studentDTOList);
-                groupDTOList.add(groupDTO);
             }
-            
-            lectureDTO.setGroupDTO(groupDTOList);
-            lectureDTOList.add(lectureDTO);
+
+            activityDTOList.add(activityDTO);
         }
-        return lectureDTOList;
+        return activityDTOList;
     }
 }

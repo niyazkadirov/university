@@ -1,6 +1,6 @@
 package com.example.university.controller;
 
-import com.example.university.dto.LectureDTO;
+import com.example.university.dto.ActivityDTO;
 import com.example.university.entity.Activity;
 import com.example.university.service.ActivityService;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +39,8 @@ public class ActivityController {
     }
 
     @GetMapping(value = "/journal")
-    public ResponseEntity<List<LectureDTO>> getJournal() {
-        List<LectureDTO> journal = activityService.getJournal();
+    public ResponseEntity<List<ActivityDTO>> getJournal() {
+        List<ActivityDTO> journal = activityService.getJournal();
         return new ResponseEntity<>(journal, HttpStatus.OK);
     }
 }
