@@ -1,10 +1,8 @@
 package com.example.university.service;
 
 import com.example.university.entity.Activity;
-import com.example.university.entity.Student;
 import com.example.university.repository.ActivityRepository;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 class ActivityServiceImplTest {

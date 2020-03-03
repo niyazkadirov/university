@@ -2,9 +2,7 @@ package com.example.university.controller;
 
 import com.example.university.dto.LectureDTO;
 import com.example.university.entity.Activity;
-import com.example.university.entity.Student;
 import com.example.university.service.ActivityService;
-import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/activity")
