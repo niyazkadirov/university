@@ -31,7 +31,7 @@ public class Student {
     @ManyToOne()
     @JoinColumn(name = "group_id")
     private Group group;
-
+    private int x;
 
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
