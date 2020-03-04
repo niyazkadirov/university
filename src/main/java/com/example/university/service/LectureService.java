@@ -1,6 +1,6 @@
 package com.example.university.service;
 
-import com.example.university.dto.LectureDTO;
+import com.example.university.dto.lectureService.LectureDTO;
 import com.example.university.entity.Lecture;
 
 import java.time.LocalTime;

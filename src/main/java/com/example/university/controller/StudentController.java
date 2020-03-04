@@ -1,5 +1,6 @@
 package com.example.university.controller;
 
+import com.example.university.dto.studentService.StudentDTO;
 import com.example.university.entity.Student;
 import com.example.university.service.StudentService;
 import javassist.NotFoundException;
@@ -41,5 +42,10 @@ public class StudentController {
     public ResponseEntity<List<Student>> getAllStudentsByGenderCode(@RequestParam Integer genderCode){
         List<Student> students = studentService.getAllStudentsByGenderCode(genderCode);
         return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
+    @GetMapping("/timetable")
+    public StudentDTO getStudentTimetable(@RequestParam Long id){
+        return studentService.getStudentTimetable(id);
     }
 }

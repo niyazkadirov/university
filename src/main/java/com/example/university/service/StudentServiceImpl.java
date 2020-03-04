@@ -1,13 +1,19 @@
 package com.example.university.service;
 
+import com.example.university.dto.studentService.LectureDTO;
+import com.example.university.dto.studentService.StudentDTO;
+import com.example.university.dto.studentService.SubjectDTO;
+import com.example.university.dto.studentService.TeacherDTO;
+import com.example.university.entity.Lecture;
 import com.example.university.entity.Student;
+import com.example.university.entity.enumeration.Day;
 import com.example.university.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -16,6 +22,9 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+
+    private final ModelMapper modelMapper;
+
 
     @Override
     public Optional<Student> getStudentById(Long id) {
@@ -56,6 +65,31 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student addStudent(Student student) {
         return studentRepository.save(student);
+    }
+
+
+    @Override
+    public StudentDTO getStudentTimetable(Long studentId) {
+        Student student = studentRepository.findById(studentId).get();
+        List<LectureDTO> lectureDTOList = new ArrayList<>();
+
+        StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
+
+        for (Lecture lecture : student.getGroup().getLectures()) {
+
+            LectureDTO lectureDTO = modelMapper.map(lecture, LectureDTO.class);
+            TeacherDTO teacherDTO = modelMapper.map(lecture.getTeacher(), TeacherDTO.class);
+            SubjectDTO subjectDTO = modelMapper.map(lecture.getSubject(), SubjectDTO.class);
+
+            lectureDTO.setTeacher(teacherDTO);
+            lectureDTO.setSubject(subjectDTO);
+            lectureDTOList.add(lectureDTO);
+        }
+        Map<Day, List<LectureDTO>> lectureDTOMap = lectureDTOList.stream().collect(Collectors.groupingBy(LectureDTO::getDay));
+
+        studentDTO.setLectureDTOMap(lectureDTOMap);
+
+        return studentDTO;
     }
 
 }

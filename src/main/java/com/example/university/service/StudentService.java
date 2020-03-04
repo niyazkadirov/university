@@ -1,5 +1,6 @@
 package com.example.university.service;
 
+import com.example.university.dto.studentService.StudentDTO;
 import com.example.university.entity.Student;
 import javassist.NotFoundException;
 
@@ -15,4 +16,6 @@ public interface StudentService {
     Student addStudent(Student student);
 
     List<Student> getAllStudentsByGenderCode(Integer genderCode);
+
+    StudentDTO getStudentTimetable(Long studentId);
 }
