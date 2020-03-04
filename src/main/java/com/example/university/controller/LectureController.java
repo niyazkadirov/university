@@ -1,6 +1,6 @@
 package com.example.university.controller;
 
-import com.example.university.dto.lectureService.LectureDTO;
+import com.example.university.dto.lectureService.getJournal.LectureDTO;
 import com.example.university.entity.Lecture;
 import com.example.university.service.LectureService;
 import lombok.RequiredArgsConstructor;

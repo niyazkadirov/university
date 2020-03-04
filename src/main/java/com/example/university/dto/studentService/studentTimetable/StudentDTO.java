@@ -1,4 +1,4 @@
-package com.example.university.dto.teacherService;
+package com.example.university.dto.studentService.studentTimetable;
 
 import com.example.university.entity.enumeration.Day;
 import lombok.Getter;
@@ -9,7 +9,8 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class TeacherDTO {
+public class StudentDTO {
+
     private String firstName;
 
     private String lastName;

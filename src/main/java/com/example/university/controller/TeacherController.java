@@ -1,6 +1,6 @@
 package com.example.university.controller;
 
-import com.example.university.dto.teacherService.TeacherDTO;
+import com.example.university.dto.teacherService.teacherTimetable.TeacherDTO;
 import com.example.university.service.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

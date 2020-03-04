@@ -1,6 +1,6 @@
 package com.example.university.controller;
 
-import com.example.university.dto.studentService.StudentDTO;
+import com.example.university.dto.studentService.studentTimetable.StudentDTO;
 import com.example.university.entity.Student;
 import com.example.university.service.StudentService;
 import javassist.NotFoundException;

@@ -1,9 +1,9 @@
 package com.example.university.service;
 
-import com.example.university.dto.teacherService.LectureDTO;
-import com.example.university.dto.teacherService.StudentDTO;
-import com.example.university.dto.teacherService.SubjectDTO;
-import com.example.university.dto.teacherService.TeacherDTO;
+import com.example.university.dto.teacherService.teacherTimetable.LectureDTO;
+import com.example.university.dto.teacherService.teacherTimetable.StudentDTO;
+import com.example.university.dto.teacherService.teacherTimetable.SubjectDTO;
+import com.example.university.dto.teacherService.teacherTimetable.TeacherDTO;
 import com.example.university.entity.Group;
 import com.example.university.entity.Lecture;
 import com.example.university.entity.Student;

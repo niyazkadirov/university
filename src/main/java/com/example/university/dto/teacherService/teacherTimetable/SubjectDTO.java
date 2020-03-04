@@ -1,4 +1,4 @@
-package com.example.university.dto.studentService;
+package com.example.university.dto.teacherService.teacherTimetable;
 
 import lombok.Getter;
 import lombok.Setter;

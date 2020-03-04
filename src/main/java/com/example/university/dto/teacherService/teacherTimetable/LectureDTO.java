@@ -1,19 +1,17 @@
-package com.example.university.dto.studentService;
+package com.example.university.dto.teacherService.teacherTimetable;
 
-import com.example.university.entity.Subject;
-import com.example.university.entity.Teacher;
+
 import com.example.university.entity.enumeration.Day;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 @Setter
 public class LectureDTO {
-
-
     private Long audienceNumber;
 
     private LocalTime startTime;
@@ -23,7 +21,8 @@ public class LectureDTO {
     @JsonIgnore
     private Day day;
 
-    private TeacherDTO teacher;
+    private SubjectDTO subjectDTO;
 
-    private SubjectDTO subject;
+    private List<StudentDTO> studentDTOList;
+
 }
