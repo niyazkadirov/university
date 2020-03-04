@@ -15,7 +15,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,28 +29,26 @@ public class TeacherServiceImp implements TeacherService {
     @Override
     public TeacherDTO getTeacherTimetable(Long teacherId) {
 
-        Teacher teacher = teacherRepository.findById(teacherId).get();
+        List<LectureDTO> lectureDTOList = new ArrayList<>();
 
+        Teacher teacher = teacherRepository.findById(teacherId).get();
         TeacherDTO teacherDTO = modelMapper.map(teacher, TeacherDTO.class);
 
-        List<LectureDTO> lectureDTOList = new ArrayList<>();
         for (Lecture lecture : teacher.getLectures()) {
             List<StudentDTO> studentDTOList = new ArrayList<>();
 
             LectureDTO lectureDTO = modelMapper.map(lecture, LectureDTO.class);
             SubjectDTO subjectDTO = modelMapper.map(lecture.getSubject(), SubjectDTO.class);
-
             lectureDTO.setSubjectDTO(subjectDTO);
 
             for (Group group : lecture.getGroups()) {
-                List<Student> students = group.getStudents();
-                for (Student student : students) {
+                for (Student student : group.getStudents()) {
                     StudentDTO map = modelMapper.map(student, StudentDTO.class);
                     studentDTOList.add(map);
                 }
             }
-            lectureDTO.setStudentDTOList(studentDTOList);
 
+            lectureDTO.setStudentDTOList(studentDTOList);
             lectureDTOList.add(lectureDTO);
         }
 
@@ -60,7 +57,6 @@ public class TeacherServiceImp implements TeacherService {
 
 
         teacherDTO.setLectureDTOMap(lectureDTOMap);
-
         return teacherDTO;
     }
 
