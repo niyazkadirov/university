@@ -1,7 +1,6 @@
 package com.example.university.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,6 +33,6 @@ public class Group {
 
     @ManyToOne()
     @JoinColumn(name = "activity_id")
-    private Activity activity;
+    private Lecture activity;
 
 }

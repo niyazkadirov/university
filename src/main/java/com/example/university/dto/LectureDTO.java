@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ActivityDTO {
+public class LectureDTO {
     String title;
     LocalTime startTime;
     LocalTime endTime;

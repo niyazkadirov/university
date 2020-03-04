@@ -1,11 +1,11 @@
 package com.example.university.service;
 
-import com.example.university.dto.ActivityDTO;
+import com.example.university.dto.LectureDTO;
 import com.example.university.dto.StudentDTO;
-import com.example.university.entity.Activity;
+import com.example.university.entity.Lecture;
 import com.example.university.entity.Group;
 import com.example.university.entity.Student;
-import com.example.university.repository.ActivityRepository;
+import com.example.university.repository.LectureRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -21,54 +21,54 @@ import static java.time.Duration.between;
 
 @Service
 @RequiredArgsConstructor
-public class ActivityServiceImpl implements ActivityService {
+public class LectureServiceImpl implements LectureService {
 
-    private final ActivityRepository activityRepository;
+    private final LectureRepository lectureRepository;
 
     private final ModelMapper modelMapper;
 
     @Override
-    public List<Activity> getAllActivity() {
-        return activityRepository.findAll();
+    public List<Lecture> getAllActivity() {
+        return lectureRepository.findAll();
     }
 
     @Override
-    public List<Activity> getAllByStartTimeBetween(LocalTime endTime, LocalTime startTime) {
-        List<Activity> activities = activityRepository.findAll();
+    public List<Lecture> getAllByStartTimeBetween(LocalTime endTime, LocalTime startTime) {
+        List<Lecture> lectures = lectureRepository.findAll();
 
-        return activities
+        return lectures
                 .stream()
                 .filter(activity -> activity.getStartTime().isBefore(endTime) & activity.getEndTime().isAfter(startTime))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void addActivity(Activity activity) {
-        activityRepository.save(activity);
+    public void addActivity(Lecture lecture) {
+        lectureRepository.save(lecture);
     }
 
 
     @Override
-    public List<ActivityDTO> getJournal() {
-        List<Activity> activities = activityRepository.findAll();
-        List<ActivityDTO> activityDTOList = new ArrayList<>();
+    public List<LectureDTO> getJournal() {
+        List<Lecture> activities = lectureRepository.findAll();
+        List<LectureDTO> lectureDTOList = new ArrayList<>();
         List<StudentDTO> studentDTOList = new ArrayList<>();
 
-        activities.forEach(activity -> {
-            ActivityDTO activityDTO = modelMapper.map(activity, ActivityDTO.class);
-            activityDTO.setStudentDTO(studentDTOList);
-            activityDTO.setDuration(between(activity.getEndTime(), activity.getStartTime()));
+        activities.forEach(lecture -> {
+            LectureDTO lectureDTO = modelMapper.map(lecture, LectureDTO.class);
+            lectureDTO.setStudentDTO(studentDTOList);
+            lectureDTO.setDuration(between(lecture.getEndTime(), lecture.getStartTime()));
 
-            activity.getGroups().stream()
+            lecture.getGroups().stream()
                     .map(Group::getStudents)
                     .flatMap(Collection::stream)
                     .sorted(Comparator.comparing(Student::getFirstName))
                     .map(student -> modelMapper.map(student, StudentDTO.class))
                     .forEachOrdered(studentDTOList::add);
 
-            activityDTOList.add(activityDTO);
+            lectureDTOList.add(lectureDTO);
         });
 
-        return activityDTOList;
+        return lectureDTOList;
     }
 }
