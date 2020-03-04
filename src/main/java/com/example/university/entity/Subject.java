@@ -13,8 +13,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "timetable")
-public class Timetable {
+@Table(name = "subject")
+public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Timetable {
     private String title;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "timetable", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject", cascade = CascadeType.ALL)
     private List<Lecture> lectures;
 
 }
