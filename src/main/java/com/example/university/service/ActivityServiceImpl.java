@@ -10,11 +10,14 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.time.Duration.between;
 
 @Service
 @RequiredArgsConstructor
@@ -51,21 +54,21 @@ public class ActivityServiceImpl implements ActivityService {
         List<ActivityDTO> activityDTOList = new ArrayList<>();
         List<StudentDTO> studentDTOList = new ArrayList<>();
 
-        for (Activity activity : activities) {
+        activities.forEach(activity -> {
             ActivityDTO activityDTO = modelMapper.map(activity, ActivityDTO.class);
             activityDTO.setStudentDTO(studentDTOList);
-            activityDTO.setDuration(Duration.between(activity.getEndTime(), activity.getStartTime()));
+            activityDTO.setDuration(between(activity.getEndTime(), activity.getStartTime()));
 
-            for (Group group : activity.getGroups()) {
-                List<Student> students = group.getStudents();
-                for (Student student : students) {
-                    StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
-                    studentDTOList.add(studentDTO);
-                }
-            }
+            activity.getGroups().stream()
+                    .map(Group::getStudents)
+                    .flatMap(Collection::stream)
+                    .sorted(Comparator.comparing(Student::getFirstName))
+                    .map(student -> modelMapper.map(student, StudentDTO.class))
+                    .forEachOrdered(studentDTOList::add);
 
             activityDTOList.add(activityDTO);
-        }
+        });
+
         return activityDTOList;
     }
 }

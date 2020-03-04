@@ -52,19 +52,7 @@ class StudentServiceImplTest {
 
 
     @Test
-    void getAllStudentsByGenderCode_ValidCodeEqualZero_ShouldPass() {
-        List<Student> students = studentService.getAllStudentsByGenderCode(0);
-
-        for (Student student : students) {
-            Assert.assertEquals(Gender.MALE.getCode(), student.getGender().getCode());
-        }
-
-        Mockito.verify(mockedStudentRepository, Mockito.times(1)).findAll();
-    }
-
-
-    @Test
-    void getAllStudentsByGenderCode_ValidCodeEqualOne_ShouldPass() {
+    void getAllStudentsByGenderCode_ValidCode_ShouldPass() {
         List<Student> students = studentService.getAllStudentsByGenderCode(1);
 
         for (Student student : students) {
@@ -74,17 +62,6 @@ class StudentServiceImplTest {
         Mockito.verify(mockedStudentRepository, Mockito.times(1)).findAll();
     }
 
-
-    @Test
-    void getAllStudentsByGenderCode_ValidCodeEqualTwo_ShouldPass() {
-        List<Student> students = studentService.getAllStudentsByGenderCode(2);
-
-        for (Student student : students) {
-            Assert.assertEquals(Gender.UNDEFINED.getCode(), student.getGender().getCode());
-        }
-
-        Mockito.verify(mockedStudentRepository, Mockito.times(1)).findAll();
-    }
 
     @Test
     void GetAllStudentsByGenderCode_NegativeCode_ShouldReturnEmptyListStudents() {

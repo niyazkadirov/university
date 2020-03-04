@@ -58,6 +58,5 @@ class ActivityServiceImplTest {
         Assert.assertEquals(filteredActivitiesList.size(), 2);
 
         Mockito.verify(activityRepository, Mockito.times(1)).findAll();
-
     }
 }
