@@ -1,7 +1,6 @@
 package com.example.university.entity;
 
 import com.example.university.entity.enumeration.Day;
-import com.example.university.entity.enumeration.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,8 +39,8 @@ public class Lecture {
     private Teacher teacher;
 
     @ManyToOne()
-    @JoinColumn(name = "timetable_id")
-    private Timetable timetable;
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "lecture", cascade = CascadeType.ALL)
     private List<Group> groups;
