@@ -32,7 +32,7 @@ public class Group {
     private List<Student> students;
 
     @ManyToOne()
-    @JoinColumn(name = "activity_id")
-    private Lecture activity;
+    @JoinColumn(name = "lecture_id")
+    private Lecture lecture;
 
 }

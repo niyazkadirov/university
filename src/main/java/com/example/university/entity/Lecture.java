@@ -1,5 +1,7 @@
 package com.example.university.entity;
 
+import com.example.university.entity.enumeration.Day;
+import com.example.university.entity.enumeration.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -14,7 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "activity")
+@Table(name = "lecture")
 public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +36,18 @@ public class Lecture {
     @Column(name = "end_time", columnDefinition = "TIME")
     private LocalTime endTime;
 
+    @ManyToOne()
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "activity", cascade = CascadeType.ALL)
-    private Set<Group> groups;
+    @ManyToOne()
+    @JoinColumn(name = "timetable_id")
+    private Timetable timetable;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lecture", cascade = CascadeType.ALL)
+    private List<Group> groups;
+
+    @Column(name = "day")
+    private Day day;
+
 }
