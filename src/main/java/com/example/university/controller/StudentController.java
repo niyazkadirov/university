@@ -7,7 +7,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,14 +45,14 @@ public class StudentController {
 
     @GetMapping(value = "/sorted")
     @ApiOperation(value = "Get all students by gender code", response = ResponseEntity.class)
-    public ResponseEntity<List<Student>> getAllStudentsByGenderCode(@RequestParam Integer genderCode){
+    public ResponseEntity<List<Student>> getAllStudentsByGenderCode(@RequestParam Integer genderCode) {
         List<Student> students = studentService.getAllStudentsByGenderCode(genderCode);
         return ResponseEntity.ok(students);
     }
 
     @GetMapping("/timetable")
     @ApiOperation(value = "Get student timetable", response = ResponseEntity.class)
-    public ResponseEntity<StudentDTO> getStudentTimetable(@RequestParam Long id){
+    public ResponseEntity<StudentDTO> getStudentTimetable(@RequestParam Long id) {
         StudentDTO studentTimetable = studentService.getStudentTimetable(id);
         return ResponseEntity.ok(studentTimetable);
     }

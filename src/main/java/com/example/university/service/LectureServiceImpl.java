@@ -2,8 +2,8 @@ package com.example.university.service;
 
 import com.example.university.dto.lectureService.getJournal.LectureDTO;
 import com.example.university.dto.lectureService.getJournal.StudentDTO;
-import com.example.university.entity.Lecture;
 import com.example.university.entity.Group;
+import com.example.university.entity.Lecture;
 import com.example.university.entity.Student;
 import com.example.university.repository.LectureRepository;
 import lombok.RequiredArgsConstructor;
