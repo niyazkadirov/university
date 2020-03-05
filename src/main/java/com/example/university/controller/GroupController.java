@@ -3,6 +3,8 @@ package com.example.university.controller;
 import com.example.university.entity.Group;
 import com.example.university.entity.Student;
 import com.example.university.service.GroupService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,19 +17,22 @@ import java.util.Set;
 @RestController
 @RequestMapping("/group")
 @RequiredArgsConstructor
+@Api(tags = {"Group"})
 public class GroupController {
 
     private final GroupService groupService;
 
 
     @GetMapping(params = "id")
+    @ApiOperation(value = "Get all students by group id", response = ResponseEntity.class)
     public ResponseEntity<List<Student>> getAllStudentsByGroupId(@RequestParam() Long id) throws NotFoundException {
         List<Student> students = groupService.getAllStudentsByGroupId(id);
-        return new ResponseEntity<>(students, HttpStatus.OK);
+        return ResponseEntity.ok(students);
     }
 
     @PostMapping()
-    public void addStudent(@RequestBody Group group) {
+    @ApiOperation(value = "Add group ")
+    public void addGroup(@RequestBody Group group) {
         groupService.addGroup(group);
     }
 

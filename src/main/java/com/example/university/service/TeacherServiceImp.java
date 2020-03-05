@@ -35,18 +35,16 @@ public class TeacherServiceImp implements TeacherService {
         TeacherDTO teacherDTO = modelMapper.map(teacher, TeacherDTO.class);
 
         for (Lecture lecture : teacher.getLectures()) {
-            List<StudentDTO> studentDTOList = new ArrayList<>();
+            List<StudentDTO> studentDTOList;
 
             LectureDTO lectureDTO = modelMapper.map(lecture, LectureDTO.class);
             SubjectDTO subjectDTO = modelMapper.map(lecture.getSubject(), SubjectDTO.class);
             lectureDTO.setSubjectDTO(subjectDTO);
 
-            for (Group group : lecture.getGroups()) {
-                for (Student student : group.getStudents()) {
-                    StudentDTO map = modelMapper.map(student, StudentDTO.class);
-                    studentDTOList.add(map);
-                }
-            }
+            studentDTOList = lecture.getGroups().stream()
+                    .flatMap(group -> group.getStudents().stream())
+                    .map(student -> modelMapper.map(student, StudentDTO.class))
+                    .collect(Collectors.toList());
 
             lectureDTO.setStudentDTOList(studentDTOList);
             lectureDTOList.add(lectureDTO);
