@@ -10,7 +10,6 @@ import com.example.university.repository.TeacherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -24,7 +23,7 @@ public class TeacherTimetableServiceImpl implements TeacherTimetableService {
 
     @Override
     public TeacherTimetableDTO getTimetable(String firstName, String lastName) {
-        Teacher teacher = teacherRepository.findFirstByFirstNameAndAndLastName(firstName, lastName);
+        Teacher teacher = teacherRepository.findFirstByFirstNameAndLastName(firstName, lastName);
 
         Map<Day, List<Lecture>> dailyLectures = teacher.getLectures().stream().collect(
                 groupingBy(Lecture::getDay));
