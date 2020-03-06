@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface StudentService {
 
-    Optional<Student> getStudentById(Long id) throws NotFoundException;
+    Optional<Student> getStudentById(Long id);
 
     List<Student> findAndSortedStudentByParams(Long age, String firstName, Boolean sortedFlag);
 

@@ -4,7 +4,9 @@ import com.example.university.dto.teacherService.teacherTimetable.LectureDTO;
 import com.example.university.dto.teacherService.teacherTimetable.StudentDTO;
 import com.example.university.dto.teacherService.teacherTimetable.SubjectDTO;
 import com.example.university.dto.teacherService.teacherTimetable.TeacherDTO;
+import com.example.university.entity.Group;
 import com.example.university.entity.Lecture;
+import com.example.university.entity.Student;
 import com.example.university.entity.Teacher;
 import com.example.university.entity.enumeration.Day;
 import com.example.university.repository.TeacherRepository;
@@ -29,27 +31,26 @@ public class TeacherServiceImp implements TeacherService {
     public TeacherDTO getTeacherTimetable(Long teacherId) {
 
         List<LectureDTO> lectureDTOList = new ArrayList<>();
-
         Teacher teacher = teacherRepository.findById(teacherId).get();
-        TeacherDTO teacherDTO = modelMapper.map(teacher, TeacherDTO.class);
 
         for (Lecture lecture : teacher.getLectures()) {
-            List<StudentDTO> studentDTOList;
+            List<StudentDTO> studentDTOList = new ArrayList<>();
 
             LectureDTO lectureDTO = modelMapper.map(lecture, LectureDTO.class);
-            SubjectDTO subjectDTO = modelMapper.map(lecture.getSubject(), SubjectDTO.class);
-            lectureDTO.setSubjectDTO(subjectDTO);
+            lectureDTO.setSubjectDTO(modelMapper.map(lecture.getSubject(), SubjectDTO.class));
 
-            studentDTOList = lecture.getGroups().stream()
-                    .flatMap(group -> group.getStudents().stream())
-                    .map(student -> modelMapper.map(student, StudentDTO.class))
-                    .collect(Collectors.toList());
+            for (Group group : lecture.getGroups()) {
+                for (Student student : group.getStudents()) {
+                    studentDTOList.add(modelMapper.map(student, StudentDTO.class));
+                }
+            }
 
             lectureDTO.setStudentDTOList(studentDTOList);
             lectureDTOList.add(lectureDTO);
         }
 
-        Map<Day, List<LectureDTO>> lectureDTOMap = lectureDTOList.stream()
+        Map<Day, List<LectureDTO>> lectureDTOMap;
+        lectureDTOMap = lectureDTOList.stream()
                 .collect(Collectors.groupingBy(LectureDTO::getDay))
                 .entrySet()
                 .stream()
@@ -57,9 +58,9 @@ public class TeacherServiceImp implements TeacherService {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
-
+        TeacherDTO teacherDTO = modelMapper.map(teacher, TeacherDTO.class);
         teacherDTO.setLectureDTOMap(lectureDTOMap);
+
         return teacherDTO;
     }
-
 }

@@ -31,7 +31,7 @@ class StudentServiceImplTest {
     private StudentServiceImpl studentService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         when(mockedStudentRepository
                 .findAll()).thenReturn(testStudents);
 

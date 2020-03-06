@@ -1,8 +1,6 @@
 package com.example.university.dto.teacherService.teacherTimetable;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Data
