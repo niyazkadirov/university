@@ -1,6 +1,5 @@
-package com.example.university.dto;
+package com.example.university.dto.teacherService.teacherTimeTable;
 
-import com.example.university.entity.Lecture;
 import com.example.university.entity.enumeration.Day;
 import lombok.AllArgsConstructor;
 import lombok.Data;
