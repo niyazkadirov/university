@@ -87,11 +87,7 @@ public class StudentServiceImpl implements StudentService {
         }
         Map<Day, List<LectureDTO>> lectureDTOMap =
                 lectureDTOList.stream()
-                        .collect(Collectors.groupingBy(LectureDTO::getDay))
-                        .entrySet().stream()
-                        .sorted(Map.Entry.comparingByKey())
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                        .collect(Collectors.groupingBy(LectureDTO::getDay));
 
         studentDTO.setLectureDTOMap(lectureDTOMap);
 
