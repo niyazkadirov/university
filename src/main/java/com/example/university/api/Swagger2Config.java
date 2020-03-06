@@ -28,6 +28,7 @@ public class Swagger2Config {
                 .tags(new Tag("Subject", "Subject controller"))
                 .tags(new Tag("Teacher", "Teacher controller"));
     }
+
     private ApiInfo apiEndPointsInfo() {
         return new ApiInfoBuilder().title("University")
                 .description("University")

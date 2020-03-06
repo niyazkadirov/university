@@ -4,7 +4,6 @@ import com.example.university.entity.Student;
 import com.example.university.entity.enumeration.Gender;
 import com.example.university.repository.StudentRepository;
 import org.junit.Assert;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
