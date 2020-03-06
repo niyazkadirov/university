@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,7 +40,8 @@ public class Lecture {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lecture", cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "lectures", cascade = CascadeType.ALL)
     private List<Group> groups;
 
     @Column(name = "day")

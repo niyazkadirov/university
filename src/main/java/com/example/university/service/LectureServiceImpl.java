@@ -1,9 +1,9 @@
 package com.example.university.service;
 
-import com.example.university.dto.LectureDTO;
-import com.example.university.dto.StudentDTO;
-import com.example.university.entity.Lecture;
+import com.example.university.dto.lectureService.getJournal.LectureDTO;
+import com.example.university.dto.lectureService.getJournal.StudentDTO;
 import com.example.university.entity.Group;
+import com.example.university.entity.Lecture;
 import com.example.university.entity.Student;
 import com.example.university.repository.LectureRepository;
 import lombok.RequiredArgsConstructor;
@@ -50,11 +50,11 @@ public class LectureServiceImpl implements LectureService {
 
     @Override
     public List<LectureDTO> getJournal() {
-        List<Lecture> activities = lectureRepository.findAll();
+        List<Lecture> lectures = lectureRepository.findAll();
         List<LectureDTO> lectureDTOList = new ArrayList<>();
         List<StudentDTO> studentDTOList = new ArrayList<>();
 
-        activities.forEach(lecture -> {
+        lectures.forEach(lecture -> {
             LectureDTO lectureDTO = modelMapper.map(lecture, LectureDTO.class);
             lectureDTO.setStudentDTO(studentDTOList);
             lectureDTO.setDuration(between(lecture.getEndTime(), lecture.getStartTime()));

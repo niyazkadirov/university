@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,8 +32,15 @@ public class Group {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
     private List<Student> students;
 
-    @ManyToOne()
-    @JoinColumn(name = "lecture_id")
-    private Lecture lecture;
+//    @ManyToOne()
+//    @JoinColumn(name = "lecture_id")
+//    private Lecture lecture;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "lecture_group",
+            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "lecture_id", referencedColumnName = "id"))
+    private List<Lecture> lectures;
 
 }

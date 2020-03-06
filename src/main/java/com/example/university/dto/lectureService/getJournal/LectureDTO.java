@@ -1,4 +1,4 @@
-package com.example.university.dto;
+package com.example.university.dto.lectureService.getJournal;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
