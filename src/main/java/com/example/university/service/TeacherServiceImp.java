@@ -4,9 +4,7 @@ import com.example.university.dto.teacherService.teacherTimetable.LectureDTO;
 import com.example.university.dto.teacherService.teacherTimetable.StudentDTO;
 import com.example.university.dto.teacherService.teacherTimetable.SubjectDTO;
 import com.example.university.dto.teacherService.teacherTimetable.TeacherDTO;
-import com.example.university.entity.Group;
 import com.example.university.entity.Lecture;
-import com.example.university.entity.Student;
 import com.example.university.entity.Teacher;
 import com.example.university.entity.enumeration.Day;
 import com.example.university.repository.TeacherRepository;
@@ -14,7 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,7 +51,9 @@ public class TeacherServiceImp implements TeacherService {
 
         Map<Day, List<LectureDTO>> lectureDTOMap = lectureDTOList.stream()
                 .collect(Collectors.groupingBy(LectureDTO::getDay))
-                .entrySet().stream().sorted(Map.Entry.comparingByKey())
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
