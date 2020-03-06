@@ -11,7 +11,7 @@ public class LectureMapper {
 
 
     public static LectureDTO mapLectureToDTO(Lecture lecture){
-        return new LectureDTO(lecture.getTitle(), lecture.getStartTime(), lecture.getEndTime(),
+        return new LectureDTO(lecture.getStartTime(), lecture.getEndTime(),
                 Duration.between(lecture.getStartTime(), lecture.getEndTime()),
                 StudentMapper.mapStudentsToDTOList(lecture.getGroups().stream().
                         flatMap(group -> group.getStudents().stream()).collect(Collectors.toList()))

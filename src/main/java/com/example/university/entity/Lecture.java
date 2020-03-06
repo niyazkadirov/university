@@ -22,9 +22,6 @@ public class Lecture {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
-
     @Column(name = "audience_number")
     private Long audienceNumber;
 
