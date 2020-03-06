@@ -18,8 +18,11 @@ public class Teacher {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name= "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<Lecture> lectures;
