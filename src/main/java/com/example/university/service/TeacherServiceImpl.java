@@ -1,8 +1,8 @@
 package com.example.university.service;
 
 import com.example.university.Mappers.LectureMapper;
-import com.example.university.dto.LectureDTO;
-import com.example.university.dto.TeacherTimetableDTO;
+import com.example.university.dto.teacherService.teacherTimeTable.LectureDTO;
+import com.example.university.dto.teacherService.teacherTimeTable.TeacherTimetableDTO;
 import com.example.university.entity.Lecture;
 import com.example.university.entity.Teacher;
 import com.example.university.entity.enumeration.Day;
@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.groupingBy;
 
 @AllArgsConstructor
 @Service
-public class TeacherTimetableServiceImpl implements TeacherTimetableService {
+public class TeacherServiceImpl implements TeacherService {
     private final TeacherRepository teacherRepository;
 
     @Override

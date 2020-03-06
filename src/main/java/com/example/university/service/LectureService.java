@@ -14,5 +14,5 @@ public interface LectureService {
 
     void addActivity(Lecture activity);
 
-    public List<LectureDTO> getJournal();
+    List<LectureDTO> getJournal();
 }
