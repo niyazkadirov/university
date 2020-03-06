@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class LectureDTO {
-
+    String title;
     LocalTime startTime;
     LocalTime endTime;
     Duration duration;
