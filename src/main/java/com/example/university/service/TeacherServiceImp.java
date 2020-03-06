@@ -14,9 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,7 +49,10 @@ public class TeacherServiceImp implements TeacherService {
         }
 
         Map<Day, List<LectureDTO>> lectureDTOMap = lectureDTOList.stream()
-                .collect(Collectors.groupingBy(LectureDTO::getDay));
+                .collect(Collectors.groupingBy(LectureDTO::getDay))
+                .entrySet().stream().sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
 
         teacherDTO.setLectureDTOMap(lectureDTOMap);
