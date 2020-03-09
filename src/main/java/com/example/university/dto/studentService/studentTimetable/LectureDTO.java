@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Duration;
 import java.time.LocalTime;
 
 @Getter
@@ -17,6 +18,8 @@ public class LectureDTO {
     private LocalTime startTime;
 
     private LocalTime endTime;
+
+    private Duration duration;
 
     @JsonIgnore
     private Day day;

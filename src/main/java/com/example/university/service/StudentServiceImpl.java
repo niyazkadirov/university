@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -84,6 +85,7 @@ public class StudentServiceImpl implements StudentService {
 
             lectureDTO.setTeacher(teacherDTO);
             lectureDTO.setSubject(subjectDTO);
+            lectureDTO.setDuration(Duration.between(lecture.getStartTime(), lecture.getEndTime()));
             lectureDTOList.add(lectureDTO);
         }
 
