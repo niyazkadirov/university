@@ -45,7 +45,8 @@ public class StudentController {
     }
 
     @GetMapping("/timetable")
-    public StudentDTO getStudentTimetable(@RequestParam Long id){
-        return studentService.getStudentTimetable(id);
+    public StudentDTO getStudentTimetable(@RequestParam String firstName,
+                                          @RequestParam String lastName){
+        return studentService.getStudentTimetable(firstName, lastName);
     }
 }

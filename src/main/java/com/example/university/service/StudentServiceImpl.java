@@ -69,10 +69,11 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public StudentDTO getStudentTimetable(Long studentId) {
+    public StudentDTO getStudentTimetable(String firstName, String lastName) {
         List<LectureDTO> lectureDTOList = new ArrayList<>();
 
-        Student student = studentRepository.findById(studentId).get();
+
+        Student student = studentRepository.findFirstByFirstNameAndLastName(firstName, lastName);
         StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
 
         for (Lecture lecture : student.getGroup().getLectures()) {
