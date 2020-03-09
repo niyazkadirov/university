@@ -35,7 +35,7 @@ public class StudentController {
                                                                @RequestParam(required = false) String firstName,
                                                                @RequestParam(required = false, defaultValue = "true") Boolean sortedFlag) {
         List<Student> students = studentService.findAndSortedStudentByParams(age, firstName, sortedFlag);
-        return new ResponseEntity<>(students, HttpStatus.OK);
+        return ResponseEntity.ok(students);
     }
 
     @PostMapping()
@@ -50,13 +50,15 @@ public class StudentController {
     @ApiOperation(value = "Get all students by gender code", response = ResponseEntity.class)
     public ResponseEntity<List<Student>> getAllStudentsByGenderCode(@RequestParam Integer genderCode) {
         List<Student> students = studentService.getAllStudentsByGenderCode(genderCode);
-        return new ResponseEntity<>(students, HttpStatus.OK);
+        return ResponseEntity.ok(students);
     }
 
     @GetMapping("/timetable")
     @ApiOperation(value = "Get student timetable", response = ResponseEntity.class)
-    public StudentDTO getStudentTimetable(@RequestParam String firstName,
-                                          @RequestParam String lastName) {
-        return studentService.getStudentTimetable(firstName, lastName);
+    public ResponseEntity<StudentDTO> getStudentTimetable(@RequestParam String firstName,
+                                                          @RequestParam String lastName) {
+
+        StudentDTO studentTimetable = studentService.getStudentTimetable(firstName, lastName);
+        return ResponseEntity.ok(studentTimetable);
     }
 }

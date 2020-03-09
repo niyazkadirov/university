@@ -1,25 +1,18 @@
 package com.example.university.controller;
 
-import com.example.university.entity.Student;
-import com.example.university.service.StudentServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -30,27 +23,12 @@ class StudentControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-//    @MockBean
-//    StudentServiceImpl studentService;
-
-    private Student student = new Student();
-
-
-    @BeforeEach
-    void setUp(){
-        student.setFirstName("test");
-        student.setId(1L);
-    }
-
 
     @Test
     void GetStudentById_ShouldPassedHeaderOK() throws Exception {
-       // when(studentService.getStudentById(anyLong())).thenReturn(java.util.Optional.ofNullable(student));
-
         mockMvc.perform(get("/students/id?id={id}", "1"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                //.andExpect(jsonPath("$.id").value(1L))
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
     }
 
@@ -71,6 +49,14 @@ class StudentControllerTest {
                 .andExpect(status().isCreated()).andDo(print());
     }
 
+
+    @Test
+    void GetStudentTimetable_ShouldPassedHeaderOK() throws Exception {
+        mockMvc.perform(get("/students/timetable?firstName={firstName}&lastName={lastName}", "Anna", "Ross"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
+    }
 
 
 }
