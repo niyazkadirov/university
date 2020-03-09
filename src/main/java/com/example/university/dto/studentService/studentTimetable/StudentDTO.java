@@ -1,4 +1,4 @@
-package com.example.university.dto.studentService;
+package com.example.university.dto.studentService.studentTimetable;
 
 import com.example.university.entity.enumeration.Day;
 import lombok.Getter;
