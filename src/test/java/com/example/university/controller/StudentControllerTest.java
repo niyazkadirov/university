@@ -44,7 +44,7 @@ class StudentControllerTest {
 
 
     @Test
-    void TestGetStudentById() throws Exception {
+    void GetStudentById_ShouldPassedHeaderOK() throws Exception {
        // when(studentService.getStudentById(anyLong())).thenReturn(java.util.Optional.ofNullable(student));
 
         mockMvc.perform(get("/students/id?id={id}", "1"))
