@@ -13,7 +13,7 @@ public interface StudentService {
 
     List<Student> findAndSortedStudentByParams(Long age, String firstName, Boolean sortedFlag);
 
-    Student addStudent(Student student);
+    void addStudent(Student student);
 
     List<Student> getAllStudentsByGenderCode(Integer genderCode);
 

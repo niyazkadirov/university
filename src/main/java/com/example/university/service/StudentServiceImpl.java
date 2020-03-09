@@ -8,6 +8,7 @@ import com.example.university.entity.Lecture;
 import com.example.university.entity.Student;
 import com.example.university.entity.enumeration.Day;
 import com.example.university.repository.StudentRepository;
+import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -64,8 +65,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student addStudent(Student student) {
-        return studentRepository.save(student);
+    public void addStudent(Student student) {
+         studentRepository.save(student);
     }
 
 

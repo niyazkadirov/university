@@ -32,10 +32,6 @@ public class Group {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group", cascade = CascadeType.ALL)
     private List<Student> students;
 
-//    @ManyToOne()
-//    @JoinColumn(name = "lecture_id")
-//    private Lecture lecture;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "lecture_group",

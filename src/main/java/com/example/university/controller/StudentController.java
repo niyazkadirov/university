@@ -39,9 +39,11 @@ public class StudentController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
     @ApiOperation(value = "Add student")
-    public Student addStudent(@RequestBody Student student) {
-        return studentService.addStudent(student);
+    public void addStudent(@RequestBody Student student) {
+        studentService.addStudent(student);
     }
 
     @GetMapping(value = "/sorted")
