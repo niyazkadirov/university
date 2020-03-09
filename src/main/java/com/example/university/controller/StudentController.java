@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class StudentController {
     @ApiOperation(value = "Get student by id", response = ResponseEntity.class)
     public ResponseEntity<Optional<Student>> getStudentById(@RequestParam Long id) throws NotFoundException {
         Optional<Student> student = studentService.getStudentById(id);
-        return ResponseEntity.ok(student);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @GetMapping(value = "/list")
@@ -34,7 +35,7 @@ public class StudentController {
                                                                @RequestParam(required = false) String firstName,
                                                                @RequestParam(required = false, defaultValue = "true") Boolean sortedFlag) {
         List<Student> students = studentService.findAndSortedStudentByParams(age, firstName, sortedFlag);
-        return ResponseEntity.ok(students);
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     @PostMapping()
@@ -47,13 +48,13 @@ public class StudentController {
     @ApiOperation(value = "Get all students by gender code", response = ResponseEntity.class)
     public ResponseEntity<List<Student>> getAllStudentsByGenderCode(@RequestParam Integer genderCode) {
         List<Student> students = studentService.getAllStudentsByGenderCode(genderCode);
-        return ResponseEntity.ok(students);
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     @GetMapping("/timetable")
     @ApiOperation(value = "Get student timetable", response = ResponseEntity.class)
-    public ResponseEntity<StudentDTO> getStudentTimetable(@RequestParam Long id) {
-        StudentDTO studentTimetable = studentService.getStudentTimetable(id);
-        return ResponseEntity.ok(studentTimetable);
+    public StudentDTO getStudentTimetable(@RequestParam String firstName,
+                                          @RequestParam String lastName) {
+        return studentService.getStudentTimetable(firstName, lastName);
     }
 }

@@ -13,10 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -72,10 +69,11 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public StudentDTO getStudentTimetable(Long studentId) {
-        Student student = studentRepository.findById(studentId).get();
+    public StudentDTO getStudentTimetable(String firstName, String lastName) {
         List<LectureDTO> lectureDTOList = new ArrayList<>();
 
+
+        Student student = studentRepository.findFirstByFirstNameAndLastName(firstName, lastName);
         StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
 
         for (Lecture lecture : student.getGroup().getLectures()) {
@@ -88,7 +86,14 @@ public class StudentServiceImpl implements StudentService {
             lectureDTO.setSubject(subjectDTO);
             lectureDTOList.add(lectureDTO);
         }
-        Map<Day, List<LectureDTO>> lectureDTOMap = lectureDTOList.stream().collect(Collectors.groupingBy(LectureDTO::getDay));
+
+        Map<Day, List<LectureDTO>> lectureDTOMap;
+        lectureDTOMap = lectureDTOList.stream()
+                .collect(Collectors.groupingBy(LectureDTO::getDay))
+                .entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
         studentDTO.setLectureDTOMap(lectureDTOMap);
 

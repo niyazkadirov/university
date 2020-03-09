@@ -17,5 +17,5 @@ public interface StudentService {
 
     List<Student> getAllStudentsByGenderCode(Integer genderCode);
 
-    StudentDTO getStudentTimetable(Long studentId);
+    StudentDTO getStudentTimetable(String firstName, String lastName);
 }
