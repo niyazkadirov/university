@@ -4,6 +4,7 @@ import com.example.university.entity.enumeration.Day;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Duration;
@@ -12,6 +13,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class LectureDTO {
 
 
