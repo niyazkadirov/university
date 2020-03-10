@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,7 @@ public class GroupController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Add group ")
     public void addGroup(@RequestBody Group group) {
         groupService.addGroup(group);

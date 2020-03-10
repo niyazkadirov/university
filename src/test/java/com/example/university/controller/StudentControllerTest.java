@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -24,19 +23,18 @@ class StudentControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+
     @Test
-    void TestGetStudentById() throws Exception {
+    void GetStudentById_ShouldPassedHeaderOK() throws Exception {
         mockMvc.perform(get("/students/id?id={id}", "1"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id").value("1"))
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
     }
 
 
     @Test
-    void addStudent() throws Exception {
-
+    void AddStudent_ShouldPassedHeaderCreated() throws Exception {
 
         String studentJson = "{\n" +
                 "                \"firstName\": \"test\",\n" +
@@ -46,8 +44,19 @@ class StudentControllerTest {
                 "            }";
 
         mockMvc.perform(post("/students")
-                .contentType(MediaType.APPLICATION_JSON).content(studentJson))
-                .andExpect(status().isOk()).andDo(print());
-
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(studentJson))
+                .andExpect(status().isCreated()).andDo(print());
     }
+
+
+    @Test
+    void GetStudentTimetable_ShouldPassedHeaderOK() throws Exception {
+        mockMvc.perform(get("/students/timetable?firstName={firstName}&lastName={lastName}", "Anna", "Ross"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType("application/json"));
+    }
+
+
 }

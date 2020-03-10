@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class StudentController {
     @ApiOperation(value = "Get student by id", response = ResponseEntity.class)
     public ResponseEntity<Optional<Student>> getStudentById(@RequestParam Long id) throws NotFoundException {
         Optional<Student> student = studentService.getStudentById(id);
-        return ResponseEntity.ok(student);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @GetMapping(value = "/list")
@@ -38,9 +39,11 @@ public class StudentController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
     @ApiOperation(value = "Add student")
-    public Student addStudent(@RequestBody Student student) {
-        return studentService.addStudent(student);
+    public void addStudent(@RequestBody Student student) {
+        studentService.addStudent(student);
     }
 
     @GetMapping(value = "/sorted")
@@ -52,8 +55,10 @@ public class StudentController {
 
     @GetMapping("/timetable")
     @ApiOperation(value = "Get student timetable", response = ResponseEntity.class)
-    public ResponseEntity<StudentDTO> getStudentTimetable(@RequestParam Long id) {
-        StudentDTO studentTimetable = studentService.getStudentTimetable(id);
+    public ResponseEntity<StudentDTO> getStudentTimetable(@RequestParam String firstName,
+                                                          @RequestParam String lastName) {
+
+        StudentDTO studentTimetable = studentService.getStudentTimetable(firstName, lastName);
         return ResponseEntity.ok(studentTimetable);
     }
 }
