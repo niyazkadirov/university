@@ -22,8 +22,9 @@ public class LectureDTO {
     private LocalTime endTime;
     private Duration duration;
 
-    @JsonIgnore
     private Day day;
     private TeacherDTO teacher;
+
+    @JsonIgnore
     private SubjectDTO subject;
 }

@@ -6,7 +6,7 @@ import com.example.university.dto.studentService.studentTimetable.LectureDTO;
 import com.example.university.dto.studentService.studentTimetable.StudentDTO;
 import com.example.university.entity.Lecture;
 import com.example.university.entity.Student;
-import com.example.university.entity.enumeration.Day;
+import com.example.university.entity.Subject;
 import com.example.university.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -76,13 +76,13 @@ public class StudentServiceImpl implements StudentService {
 
         Student student = studentRepository.findFirstByFirstNameAndLastName(firstName, lastName);
 
-        Map<Day, List<Lecture>> lectureDTOMap =
-                student.getGroup().getLectures().stream()
-                        .collect(Collectors.groupingBy(Lecture::getDay));
+        Map<Subject, List<Lecture>> lectureDTOMap = student.getGroup().getLectures().stream()
+                .collect(Collectors.groupingBy(Lecture::getSubject));
 
-        Map<Day, List<LectureDTO>> dayListMap = lectureDTOMap.keySet().stream()
-                .collect(Collectors.toMap(day -> day, day ->
-                        LectureMapper.mapLectureToDTOList(student.getGroup().getLectures()), (a, b) -> b, TreeMap::new));
+        Map<String, List<LectureDTO>> dayListMap = new TreeMap<>();
+        for (Subject subject : lectureDTOMap.keySet()) {
+            dayListMap.put(subject.getTitle(), LectureMapper.mapLectureToDTOList(student.getGroup().getLectures()));
+        }
 
         return StudentMapper.mapStudentToDTO(student, dayListMap);
     }
